@@ -28,6 +28,14 @@ when 'yo' then
   `curl -s -F api_ver=0.1 -F api_token=#{$api_token} -F username=#{ARGV[1]} #{$endpoint}/yo/`
 when 'yoall' then 
   `curl -s -F api_ver=0.1 -F api_token=#{$api_token} #{$endpoint}/yoall/`
+when 'friends_count' then 
+  response = `curl -s "#{$endpoint}/friends_count/?api_ver=0.1&api_token=#{$api_token}"`
+  json = JSON.parse(response)
+  puts json['result']
+when 'list_friends' then 
+  response = `curl -s "#{$endpoint}/list_friends/?api_ver=0.1&api_token=#{$api_token}"`
+  json = JSON.parse(response)
+  puts json['result']
 when 'create_user' then
   response = `curl -s -F api_ver=0.1 -F username=#{ARGV[1]} -F password=#{ARGV[2]} #{$endpoint}/config/create_user/`
   json = JSON.parse(response)
