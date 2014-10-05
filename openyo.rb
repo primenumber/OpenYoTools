@@ -17,6 +17,10 @@ def load_setting
   $endpoint = json['endpoint']
 end
 
+def show(response)
+  json = JSON.parse(response)
+  puts json['result']
+end
 if File.exist?(ENV['HOME'] + '/.openyo') then
   load_setting
 else
@@ -24,10 +28,12 @@ else
 end
 
 case ARGV[0]
-when 'yo' then 
-  `curl -s -F api_ver=0.1 -F api_token=#{$api_token} -F username=#{ARGV[1]} #{$endpoint}/yo/`
+when 'yo' then
+  response = `curl -s -F api_ver=0.1 -F api_token=#{$api_token} -F username=#{ARGV[1]} #{$endpoint}/yo/`
+  show(response)
 when 'yoall' then 
-  `curl -s -F api_ver=0.1 -F api_token=#{$api_token} #{$endpoint}/yoall/`
+  response = `curl -s -F api_ver=0.1 -F api_token=#{$api_token} #{$endpoint}/yoall/`
+  show(response)
 when 'friends_count' then 
   response = `curl -s "#{$endpoint}/friends_count/?api_ver=0.1&api_token=#{$api_token}"`
   json = JSON.parse(response)
