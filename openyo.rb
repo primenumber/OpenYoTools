@@ -23,8 +23,23 @@ else
   puts 'config file does not exist'
 end
 
+if ARGV[0].nil?
+  puts "Usage:"
+  puts" #{File.basename(__FILE__)} yo USERNAME -- Yo to USERNAME"
+  puts" #{File.basename(__FILE__)} yoall -- send yo to all friends"
+  puts" #{File.basename(__FILE__)} friend_count -- count friends"
+  puts" #{File.basename(__FILE__)} list_friends -- show all friends"
+  puts" #{File.basename(__FILE__)} create_user USERNAME PASSWORD -- create user"
+  puts" #{File.basename(__FILE__)} set ENDPOINT -- set endpoint"
+  exit(-1)
+end
+
 case ARGV[0]
 when 'yo' then 
+  if ARGV[1].nil?
+    puts "Usage: #{File.basename(__FILE__)} yo USERNAME"
+    exit(-1)
+  end
   `curl -s -F api_ver=0.1 -F api_token=#{$api_token} -F username=#{ARGV[1]} #{$endpoint}/yo/`
 when 'yoall' then 
   `curl -s -F api_ver=0.1 -F api_token=#{$api_token} #{$endpoint}/yoall/`
@@ -37,12 +52,20 @@ when 'list_friends' then
   json = JSON.parse(response)
   puts json['result']
 when 'create_user' then
+  if ARGV[1].nil?
+    puts "Usage: #{File.basename(__FILE__)} create_user USERNAME PASSWORD"
+    exit(-1)
+  end
   response = `curl -s -F api_ver=0.1 -F username=#{ARGV[1]} -F password=#{ARGV[2]} #{$endpoint}/config/create_user/`
   json = JSON.parse(response)
   $username = ARGV[1]
   $api_token = json['api_token']
   save_setting
 when 'set' then
+  if ARGV[1].nil?
+    puts "Usage: #{File.basename(__FILE__)} set endpoint ENDPOINT"
+    exit(-1)
+  end
   case ARGV[1]
   when 'endpoint' then
     $endpoint = ARGV[2]
