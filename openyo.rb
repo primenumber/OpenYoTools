@@ -57,6 +57,9 @@ when 'list_friends' then
   response = `curl -s "#{$endpoint}/list_friends/?api_ver=0.1&api_token=#{$api_token}"`
   json = JSON.parse(response)
   puts json['result']
+when 'history' then
+  response = `curl -s "#{$endpoint}/history/?api_ver=0.1&api_token=#{$api_token}"`
+  show(response)
 when 'create_user' then
   if ARGV[1].nil?
     puts "Usage: #{File.basename(__FILE__)} create_user USERNAME PASSWORD"
