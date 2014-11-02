@@ -30,9 +30,10 @@ end
 if ARGV[0].nil?
   puts "Usage:"
   puts" #{File.basename(__FILE__)} yo USERNAME -- Yo to USERNAME"
-  puts" #{File.basename(__FILE__)} yoall -- send yo to all friends"
+  puts" #{File.basename(__FILE__)} yoall -- send Yo to all friends"
   puts" #{File.basename(__FILE__)} friend_count -- count friends"
   puts" #{File.basename(__FILE__)} list_friends -- show all friends"
+  puts" #{File.basename(__FILE__)} history -- show recently Yo from friends"
   puts" #{File.basename(__FILE__)} create_user USERNAME PASSWORD -- create user"
   puts" #{File.basename(__FILE__)} set ENDPOINT -- set endpoint"
   exit(-1)
@@ -57,6 +58,9 @@ when 'list_friends' then
   response = `curl -s "#{$endpoint}/list_friends/?api_ver=0.1&api_token=#{$api_token}"`
   json = JSON.parse(response)
   puts json['result']
+when 'history' then
+  response = `curl -s "#{$endpoint}/history/?api_ver=0.1&api_token=#{$api_token}"`
+  show(response)
 when 'create_user' then
   if ARGV[1].nil?
     puts "Usage: #{File.basename(__FILE__)} create_user USERNAME PASSWORD"

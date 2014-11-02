@@ -15,7 +15,7 @@ OpenYoをコマンドラインから扱うためのツール
 
 ````
 $ ./openyo.rb set endpoint https://OpenYo.nna774.net
-$ ./openyo.rb create\_user hoge pass
+$ ./openyo.rb create_user hoge pass
 ````
 
 ### Yo
@@ -35,11 +35,17 @@ $ ./openyo.rb yoall
 ### Count Total Friends
 
 ````
-$ ./openyo.rb friends\_count
+$ ./openyo.rb friends_count
 ````
 
 ### List Friends
 
 ````
-$ ./openyo.rb list\_friends
+$ ./openyo.rb list_friends
+````
+
+### History
+
+````
+$ ./openyo.rb history
 ````
