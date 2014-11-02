@@ -52,12 +52,10 @@ when 'yoall' then
   show(response)
 when 'friends_count' then 
   response = `curl -s "#{$endpoint}/friends_count/?api_ver=0.1&api_token=#{$api_token}"`
-  json = JSON.parse(response)
-  puts json['result']
+  show(response)
 when 'list_friends' then 
   response = `curl -s "#{$endpoint}/list_friends/?api_ver=0.1&api_token=#{$api_token}"`
-  json = JSON.parse(response)
-  puts json['result']
+  show(response)
 when 'history' then
   response = `curl -s "#{$endpoint}/history/?api_ver=0.1&api_token=#{$api_token}"`
   show(response)
