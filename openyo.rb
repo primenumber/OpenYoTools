@@ -30,9 +30,10 @@ end
 if ARGV[0].nil?
   puts "Usage:"
   puts" #{File.basename(__FILE__)} yo USERNAME -- Yo to USERNAME"
-  puts" #{File.basename(__FILE__)} yoall -- send yo to all friends"
+  puts" #{File.basename(__FILE__)} yoall -- send Yo to all friends"
   puts" #{File.basename(__FILE__)} friend_count -- count friends"
   puts" #{File.basename(__FILE__)} list_friends -- show all friends"
+  puts" #{File.basename(__FILE__)} history -- recently Yo from friends"
   puts" #{File.basename(__FILE__)} create_user USERNAME PASSWORD -- create user"
   puts" #{File.basename(__FILE__)} set ENDPOINT -- set endpoint"
   exit(-1)
